@@ -28,13 +28,20 @@ const App = () => {
       return;
     }
 
-    const isValidEmail = validator.isEmail(email);
+  const isValidEmail = validator.isEmail(email);
 
     if (!isValidEmail) {
       setErrorMessage('Please enter a valid email address');
       setIsEmailValid(false);
       return;
     }
+    const EmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!EmailRegex.test(email)) {
+      setErrorMessage('Please enter a valid email address');
+      setIsEmailValid(false);
+      return;
+    }
+    
     setErrorMessage('');
     setIsEmailValid(true);
   }
@@ -51,7 +58,6 @@ const App = () => {
       setIsPasswordValid(false);
       return;
     }
-    
     const isNonWhiteSpace = /^\S*$/;
     if (!isNonWhiteSpace.test(password)) {
       setErrorMessage('Password must not contain Whitespaces.');
@@ -85,7 +91,6 @@ const App = () => {
       setIsPasswordValid(false);
       return;
     }
-
     setErrorMessage('');
     setIsPasswordValid(true);
   }
