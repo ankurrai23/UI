@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text,Image, TextInput, TouchableOpacity, StyleSheet,Alert } from 'react-native';
 
-const validator = require('validator');
+
 
 
 const App = () => {
