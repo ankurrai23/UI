@@ -51,6 +51,41 @@ const App = () => {
       setIsPasswordValid(false);
       return;
     }
+    
+    const isNonWhiteSpace = /^\S*$/;
+    if (!isNonWhiteSpace.test(password)) {
+      setErrorMessage('Password must not contain Whitespaces.');
+      setIsPasswordValid(false);
+      return;
+    }
+
+    const isContainsUppercase = /^(?=.*[A-Z]).*$/;
+    if (!isContainsUppercase.test(password)) {
+      setErrorMessage('Password must contain at least one UpperCase Letter.');
+      setIsPasswordValid(false);
+      return;
+    }
+
+    const isContainsLowercase = /^(?=.*[a-z]).*$/;
+    if (!isContainsLowercase.test(password)) {
+      setErrorMessage('Password must contain at least one LowerCase Letter');
+      setIsPasswordValid(false);
+      return;
+    }
+
+    const isContainsNumber = /^(?=.*[0-9]).*$/;
+    if (!isContainsNumber.test(password)) {
+      setErrorMessage('Password must contain at least one Number');
+      setIsPasswordValid(false);
+      return;
+    }
+    const isContainSpecialCharacter=/^(?=.*[@#$%^&+=]).*$/;
+    if (!isContainSpecialCharacter.test(password)) {
+      setErrorMessage('Password must contain at least one Special Character');
+      setIsPasswordValid(false);
+      return;
+    }
+
     setErrorMessage('');
     setIsPasswordValid(true);
   }
