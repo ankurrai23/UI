@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import { View, Text,Image, TextInput, TouchableOpacity, StyleSheet,Alert } from 'react-native';
 
 
-
-
 const App = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [ispasswordVisible, setIsPasswordVisible] = useState(false)
 
   const handleEmailChange = (email) => {
     setEmail(email);
@@ -28,13 +27,6 @@ const App = () => {
       return;
     }
 
-  const isValidEmail = validator.isEmail(email);
-
-    if (!isValidEmail) {
-      setErrorMessage('Please enter a valid email address');
-      setIsEmailValid(false);
-      return;
-    }
     const EmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!EmailRegex.test(email)) {
       setErrorMessage('Please enter a valid email address');
@@ -108,6 +100,10 @@ const App = () => {
     }
   }
 
+  const togglePasswordVisibility=()=>{
+    setIsPasswordVisible(prev => !prev);
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>WELCOME</Text>
@@ -119,14 +115,26 @@ const App = () => {
         value={email}
         onChangeText={(text) => handleEmailChange(text)}
       />
+        <View style={styles.passSection}>
       <TextInput
-        style={styles.input}
+        style={[styles.input,{flex:1}]}
         placeholder="Password"
         autoCapitalize="none"
-        secureTextEntry={true}
+        secureTextEntry={!ispasswordVisible}
         value={password}
         onChangeText={(text) => handlePasswordChange(text)}
       />
+      <TouchableOpacity activeOpacity={0.8} onPress={togglePasswordVisibility} style={[{zIndex:1,position:'absolute',right:16}]}>
+                  <Image
+                    source={
+                      ispasswordVisible
+                        ? require('/Users/fabhotels/Desktop/ReactNative/loginUI/UINEW/LOGINUI/assets/hide.png')
+                        : require('/Users/fabhotels/Desktop/ReactNative/loginUI/UINEW/LOGINUI/assets/view.png')
+                    }
+                    style={[styles.btnImage,{marginTop:10}]}
+                  />
+                </TouchableOpacity>
+      </View>
       {errorMessage !== '' && (
         <Text style={styles.errorText}>{errorMessage}</Text>
       )}
@@ -135,7 +143,7 @@ const App = () => {
         disabled={!isEmailValid || !isPasswordValid}
         onPress={handleSubmit}
       >
-        <Text style={styles.buttonText}>Login</Text>
+        <Text style={[styles.buttonText]}>Login</Text>
       </TouchableOpacity>
 
         <View>
@@ -166,7 +174,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
   },
   title: {
     fontSize: 24,
@@ -180,9 +187,8 @@ const styles = StyleSheet.create({
     fontWeight:600
   },
   input: {
-    width: '80%',
     padding: 10,
-    borderWidth: .1,
+    borderWidth: 0.1,
     borderRadius: 10,
     marginBottom: 10,
     backgroundColor:'#e6e3e1'
@@ -192,7 +198,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     marginTop: 20,
-    width: '80%',
   },
   buttonEnabled: {
     opacity: 1,
@@ -204,7 +209,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
     textAlign: 'center',
-    fontWeight:'bold'
+    fontWeight:'bold',
   },
   logo:{
     flexDirection:'row',
@@ -224,6 +229,13 @@ const styles = StyleSheet.create({
   limage:{
     width:20,
     height:30
+  },
+  btnImage:{
+    width:15,
+    height:15,
+  },
+  passSection:{
+    flexDirection:'row'
   }
 })
 export default App;
