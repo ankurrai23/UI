@@ -26,6 +26,7 @@ const App = () => {
       setIsEmailValid(false);
       return;
     }
+  
 
     const EmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!EmailRegex.test(email)) {
@@ -115,6 +116,7 @@ const App = () => {
         value={email}
         onChangeText={(text) => handleEmailChange(text)}
       />
+      <Text>HIII MY NAME IS ANKUR AND THISadfkanbd COMMIT IS TO VERIFY THE CHANGES</Text>
         <View style={styles.passSection}>
       <TextInput
         style={[styles.input,{flex:1}]}
