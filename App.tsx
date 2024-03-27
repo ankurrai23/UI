@@ -116,7 +116,7 @@ const App = () => {
         value={email}
         onChangeText={(text) => handleEmailChange(text)}
       />
-      <Text>HIII MY NAME IS ANKUR AND THISadfkanbd COMMIT IS TO VERIFY THE CHANGES</Text>
+      <Text>HIII MY NAME IS ANKUR AND THIS IS THE COMMIT ON THE TESTING BRANCH </Text>
         <View style={styles.passSection}>
       <TextInput
         style={[styles.input,{flex:1}]}
